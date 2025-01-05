@@ -23,16 +23,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.qrc">
+    <QtRcc Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.ui">
+    <QtUic Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.h">
+    <QtMoc Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.cpp">
+    <ClCompile Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <None Include="QtCameraControls.ico">
@@ -43,28 +43,28 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="windows\QtCameraControlsDialog\qtcameracontrolsdialog.cpp">
+    <ClCompile Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.cpp">
+    <ClCompile Include="src\widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="windows\QtCameraControlsDialog\qtcameracontrolsdialog.h">
+    <QtMoc Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="windows\QtCameraControlsDialog\qtcameracontrolsdialog.ui">
+    <QtUic Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.h">
+    <ClInclude Include="src\widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

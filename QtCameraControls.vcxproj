@@ -92,22 +92,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.qrc" />
-    <QtUic Include="windows\QtCameraControlsDialog\qtcameracontrolsdialog.ui" />
-    <QtUic Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.ui" />
-    <QtMoc Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.h" />
-    <ClCompile Include="widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.cpp" />
-    <ClCompile Include="windows\QtCameraControlsDialog\qtcameracontrolsdialog.cpp" />
-    <ClCompile Include="windows\QtCameraControlsWindow\qtcameracontrolswindow.cpp" />
-    <ClCompile Include="main.cpp" />
+    <QtRcc Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.qrc" />
+    <QtUic Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.ui" />
+    <QtUic Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.ui" />
+    <QtMoc Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.h" />
+    <ClCompile Include="src\widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.cpp" />
+    <ClCompile Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.cpp" />
+    <ClCompile Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <None Include="QtCameraControls.ico" />
     <ResourceCompile Include="QtCameraControls.rc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="windows\QtCameraControlsDialog\qtcameracontrolsdialog.h" />
+    <QtMoc Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.h" />
+    <ClInclude Include="src\widgets\QtFormatTableWidgetItem\qtcameraformattablewidgetitem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
