@@ -3,14 +3,14 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_qtcameracontrolswindow.h"
 
-class QtCameraControls : public QMainWindow
+class QtCameraControlsWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    QtCameraControls(QWidget *parent = nullptr);
-    ~QtCameraControls();
+    QtCameraControlsWindow(QWidget *parent = nullptr);
+    ~QtCameraControlsWindow();
 
 private:
-    Ui::QtCameraControlsClass ui;
+    Ui::QtCameraControlsWindow ui;
 };

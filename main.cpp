@@ -1,4 +1,4 @@
-#include "qtcameracontrols.h"
+#include "windows/QtCameraControlsWindow/qtcameracontrolswindow.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])

@@ -1,22 +1,673 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>QtCameraControlsDialogClass</class>
- <widget class="QMainWindow" name="QtCameraControlsDialogClass" >
-  <property name="objectName" >
-   <string notr="true">QtCameraControlsDialogClass</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QDialog" name="QtCameraControlsDialogClass">
+  <property name="geometry">
    <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>600</width>
-	<height>400</height>
+    <x>0</x>
+    <y>0</y>
+    <width>529</width>
+    <height>889</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>QtCameraControlsDialog</string>
-  </property>  <widget class="QMenuBar" name="menuBar" />  <widget class="QToolBar" name="mainToolBar" />  <widget class="QWidget" name="centralWidget" />  <widget class="QStatusBar" name="statusBar" />
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QFrame" name="frame_2">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Camera Device: </string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="labelCameraDevice">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>Active</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkboxActive">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupFormat">
+     <property name="title">
+      <string>Format</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="8" column="0">
+       <widget class="QPushButton" name="buttonResetFilters">
+        <property name="text">
+         <string>Reset Filters</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="labelResolution">
+        <property name="text">
+         <string>labelResolution</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="labelPixelFormat">
+        <property name="text">
+         <string>labelPixelFormat</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2" rowspan="2">
+       <widget class="QTableWidget" name="tableFormats">
+        <property name="editTriggers">
+         <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>100</number>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderStretchLastSection">
+         <bool>false</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>FPS</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Resolution</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Pixel Format</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="labelFps">
+        <property name="text">
+         <string>labelFps</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QPushButton" name="buttonSelect">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Select</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="2">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Filters</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="1">
+          <widget class="QComboBox" name="dropdownFps"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Pixel Format</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="dropdownResolution"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>Resolution</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="dropdownPixelFormat"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>FPS</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Pixel Format:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Resolution:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>FPS:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>75</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Zoom and Focus</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_19">
+        <property name="text">
+         <string>Zoom</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSlider" name="sliderZoom">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_20">
+        <property name="text">
+         <string>Focus Mode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_21">
+        <property name="text">
+         <string>Focus Distance</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="dropdownFocusMode">
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Auto (Near)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Auto (Far)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Hyperfocal</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Infinity</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Manual</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSlider" name="sliderFocusDistance">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Settings</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="sizeConstraint">
+       <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+      </property>
+      <property name="spacing">
+       <number>9</number>
+      </property>
+      <item row="10" column="1">
+       <widget class="QComboBox" name="dropdownWhiteBalanceMode">
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Manual</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Sunlight</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Cloudy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Shade</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Tungsten</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fluorescent</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Flash</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Sunset</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="11" column="0" colspan="2">
+       <widget class="QPushButton" name="buttonFFMPEG">
+        <property name="text">
+         <string>Open FFMPEG Settings</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>Auto Exposure Time</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Manual ISO Sensitivity</string>
+        </property>
+        <property name="buddy">
+         <cstring>sliderManualIsoSensitivity</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>Auto Iso Sensitivity</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QSlider" name="sliderManualIsoSensitivity">
+        <property name="maximum">
+         <number>128000</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="dropdownFlashMode">
+        <item>
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>On</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Flash Mode</string>
+        </property>
+        <property name="buddy">
+         <cstring>dropdownFlashMode</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QSlider" name="sliderManualExposureTime">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="checkboxAutoExposureTime">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QCheckBox" name="checkboxAutoIsoSensitivity">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QComboBox" name="dropdownTorchMode">
+        <item>
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>On</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="dropdownExposureMode">
+        <item>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Manual</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Portrait</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Night</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Sports</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Snow</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Beach</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Action</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Landscape</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Night Portrait</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Theatre</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Sunset</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Steady Photo</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fireworks</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Party</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Candlelight</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Barcode</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>White Balance Mode</string>
+        </property>
+        <property name="buddy">
+         <cstring>dropdownWhiteBalanceMode</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSlider" name="sliderExposureComp">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Manual Exposure Time</string>
+        </property>
+        <property name="buddy">
+         <cstring>sliderManualExposureTime</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Torch Mode</string>
+        </property>
+        <property name="buddy">
+         <cstring>dropdownTorchMode</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Exposure Mode</string>
+        </property>
+        <property name="buddy">
+         <cstring>dropdownExposureMode</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSlider" name="sliderColorTemp">
+        <property name="maximum">
+         <number>10000</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Exposure Comp.</string>
+        </property>
+        <property name="buddy">
+         <cstring>sliderExposureComp</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Color Temperature</string>
+        </property>
+        <property name="buddy">
+         <cstring>sliderColorTemp</cstring>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::RestoreDefaults|QDialogButtonBox::StandardButton::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
  <connections/>
-</UI>
+</ui>
