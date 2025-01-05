@@ -1,5 +1,5 @@
 # QtCameraControls
-A widget/dialog for controlling Qt camera settings. It includes all available slots for QCamera for Qt 6.8.0.
+A widget/dialog for controlling Qt camera settings and state. It includes all available slots for QCamera for Qt 6.8.0.
 
 # Supported Platforms
 - Windows
@@ -27,10 +27,13 @@ A widget/dialog for controlling Qt camera settings. It includes all available sl
 	- [x] Focus Mode
 	- [x] Focus Distance
 - [x] FFMPEG support for UVC camera control
-- [ ] Basic camera preview:
-	- [ ] Capture image
 - [ ] Full checks for camera feature availablility
 - [ ] Full error handling
+
+## Test Program Features
+- [ ] Basic camera preview:
+	- [ ] QVideoWidget preview
+	- [ ] Camera device selection
 
 # Build Instructions
 1. Clone the repository
