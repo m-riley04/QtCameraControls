@@ -108,9 +108,14 @@ QMap<QString, QCamera::FocusMode> focusModeMap{
 };
 
 QtCameraControlsDialog::QtCameraControlsDialog(QCamera* camera, QMediaCaptureSession* cap, QWidget* parent)
-	: QDialog(parent), pCamera(camera)
+	: QDialog(parent), pCamera(camera), pCaptureSession(cap)
 {
 	ui.setupUi(this);
+
+	if (pCamera == nullptr) {
+		QMessageBox::warning(this, "Error", "Could not initialize camera: Camera is null.");
+		return;
+	}
 
 	/// Initialzie camera device
 	mName = camera->cameraDevice().description();
