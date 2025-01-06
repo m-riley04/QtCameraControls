@@ -380,24 +380,7 @@ void QtCameraControlsDialog::initializeZoomFocusGroup()
 	ui.sliderZoom->setMaximum(pCamera->maximumZoomFactor());
 
 	// Connect widgets to controls
-	connect(ui.sliderZoomRate, &QSlider::valueChanged, pCamera, [this](int value) {
-		pCamera->zoomTo(pCamera->zoomFactor(), value);
-		});
-
-	connect(ui.sliderZoom, &QSlider::valueChanged, pCamera, [this](int value) {
-		pCamera->setZoomFactor(value);
-		pCamera->zoomTo(value, 1);
-		});
-
-	connect(ui.dropdownFocusMode, &QComboBox::currentIndexChanged, pCamera, [this](int index) {
-		pCamera->setFocusMode(static_cast<QCamera::FocusMode>(index));
-		});
-
-	connect(ui.sliderFocusDistance, &QSlider::valueChanged, pCamera, [this](int value) {
-		pCamera->setFocusDistance(value);
-		});
-
-	
+	connectZoomFocusControls();
 }
 
 void QtCameraControlsDialog::initializeSettingsGroup()
@@ -433,9 +416,43 @@ void QtCameraControlsDialog::initializeSettingsGroup()
 
 	// Connect widgets to controls
 	connectSettingsControls();
+}
 
-	// Connect ffmpeg settings button
-	connect(ui.buttonFFMPEG, &QPushButton::clicked, this, &QtCameraControlsDialog::openFFPMEGSettings);
+void QtCameraControlsDialog::connectFormatControls()
+{
+	// Initialize filters
+	connect(ui.dropdownFps, &QComboBox::currentIndexChanged, this, &QtCameraControlsDialog::updateFormatTable);
+	connect(ui.dropdownResolution, &QComboBox::currentIndexChanged, this, &QtCameraControlsDialog::updateFormatTable);
+	connect(ui.dropdownPixelFormat, &QComboBox::currentIndexChanged, this, &QtCameraControlsDialog::updateFormatTable);
+
+	// Initialize reset button
+	connect(ui.buttonResetFilters, &QPushButton::clicked, this, &QtCameraControlsDialog::resetFilters);
+
+	// Initialize select button
+	connect(ui.buttonSelect, &QPushButton::clicked, this, &QtCameraControlsDialog::onSelectClicked);
+
+	// Initialize format table
+	connect(ui.tableFormats, &QTableWidget::cellClicked, this, &QtCameraControlsDialog::onFormatClicked);
+}
+
+void QtCameraControlsDialog::connectZoomFocusControls()
+{
+	connect(ui.sliderZoomRate, &QSlider::valueChanged, pCamera, [this](int value) {
+		pCamera->zoomTo(pCamera->zoomFactor(), value);
+		});
+
+	connect(ui.sliderZoom, &QSlider::valueChanged, pCamera, [this](int value) {
+		pCamera->setZoomFactor(value);
+		pCamera->zoomTo(value, 1);
+		});
+
+	connect(ui.dropdownFocusMode, &QComboBox::currentIndexChanged, pCamera, [this](int index) {
+		pCamera->setFocusMode(static_cast<QCamera::FocusMode>(index));
+		});
+
+	connect(ui.sliderFocusDistance, &QSlider::valueChanged, pCamera, [this](int value) {
+		pCamera->setFocusDistance(value);
+		});
 }
 
 void QtCameraControlsDialog::connectSettingsControls()
@@ -470,23 +487,9 @@ void QtCameraControlsDialog::connectSettingsControls()
 	connect(ui.dropdownWhiteBalanceMode, &QComboBox::currentIndexChanged, pCamera, [this](int index) {
 		pCamera->setWhiteBalanceMode(static_cast<QCamera::WhiteBalanceMode>(index));
 		});
-}
 
-void QtCameraControlsDialog::connectFormatControls()
-{
-	// Initialize filters
-	connect(ui.dropdownFps, &QComboBox::currentIndexChanged, this, &QtCameraControlsDialog::updateFormatTable);
-	connect(ui.dropdownResolution, &QComboBox::currentIndexChanged, this, &QtCameraControlsDialog::updateFormatTable);
-	connect(ui.dropdownPixelFormat, &QComboBox::currentIndexChanged, this, &QtCameraControlsDialog::updateFormatTable);
-
-	// Initialize reset button
-	connect(ui.buttonResetFilters, &QPushButton::clicked, this, &QtCameraControlsDialog::resetFilters);
-
-	// Initialize select button
-	connect(ui.buttonSelect, &QPushButton::clicked, this, &QtCameraControlsDialog::onSelectClicked);
-
-	// Initialize format table
-	connect(ui.tableFormats, &QTableWidget::cellClicked, this, &QtCameraControlsDialog::onFormatClicked);
+	// Connect ffmpeg settings button
+	connect(ui.buttonFFMPEG, &QPushButton::clicked, this, &QtCameraControlsDialog::openFFMPEGSettings);
 }
 
 void QtCameraControlsDialog::resetFilters()
@@ -506,8 +509,6 @@ void QtCameraControlsDialog::resetFilters()
 	ui.dropdownFps->blockSignals(false);
 	ui.dropdownResolution->blockSignals(false);
 	ui.dropdownPixelFormat->blockSignals(false);
-
-	
 }
 
 void QtCameraControlsDialog::onFormatClicked(int row, int column)
@@ -627,11 +628,18 @@ void QtCameraControlsDialog::updateFormatTable()
 	}
 }
 
-void QtCameraControlsDialog::openFFPMEGSettings()
+void QtCameraControlsDialog::openFFMPEGSettings()
 {
+	// Check OS for compatibility
+	#ifdef Q_OS_WIN
+	#else
+		QMessageBox::warning(this, "Error", "FFMPEG settings are only available on Windows.");
+		return;
+	#endif
+
 	QProcess* process = new QProcess();
 
-	// Hanlde errors
+	// Handle errors
 	connect(process, &QProcess::errorOccurred, [this](QProcess::ProcessError error) {
 		switch (error) {
 		case QProcess::ProcessError::FailedToStart:
@@ -657,6 +665,7 @@ void QtCameraControlsDialog::openFFPMEGSettings()
 			break;
 		}
 		});
-
-	process->start("ffmpeg -f dshow -show_video_device_dialog true -i video=\"" + this->mName + '"');
+	QStringList args;
+	args << "-f" << "dshow" << "-show_video_device_dialog" << "true" << "-i" << "video=" + this->mName;
+	process->start("ffmpeg", args);
 }
