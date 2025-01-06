@@ -29,12 +29,13 @@ private:
 	QCameraFormat selectedFormat;
 
 	void populateFilterDropdowns();
+	void populateExposureModes();
+	void populateFlashModes();
+	void populateFocusModes();
+	void populateTorchModes();
+	void populateWhiteBalanceModes();
 
-	void initializeExposureModes();
-	void initializeFlashModes();
-	void initializeFocusModes();
-	void initializeTorchModes();
-	void initializeWhiteBalanceModes();
+	void initializeSupportedFeatures();
 
 	void initializeFormatGroup();
 	void initializeZoomFocusGroup();

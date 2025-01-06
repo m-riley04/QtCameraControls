@@ -1,8 +1,8 @@
 #include "QtCameraControlsDialog.h"
 
-/**
-* A map of pixel formats to their string representations.
-*/
+/// <summary>
+/// A map of pixel formats to their string representations.
+/// </summary>
 QMap<QVideoFrameFormat::PixelFormat, QString> pixelFormatMap{
 	{ QVideoFrameFormat::Format_Invalid, "Invalid" },
 	{ QVideoFrameFormat::Format_ARGB8888, "ARGB8888" },
@@ -39,6 +39,74 @@ QMap<QVideoFrameFormat::PixelFormat, QString> pixelFormatMap{
 	{ QVideoFrameFormat::Format_YUV420P10, "YUV420P10" },
 };
 
+/// <summary>
+/// A map of string reps to their values for exposure modes.
+/// </summary>
+QMap<QString, QCamera::ExposureMode> exposureModeMap{
+	{ "Auto",           QCamera::ExposureMode::ExposureAuto },
+	{ "Manual",         QCamera::ExposureMode::ExposureManual },
+	{ "Portrait",       QCamera::ExposureMode::ExposurePortrait },
+	{ "Night",          QCamera::ExposureMode::ExposureNight },
+	{ "Sports",         QCamera::ExposureMode::ExposureSports },
+	{ "Snow",           QCamera::ExposureMode::ExposureSnow },
+	{ "Beach",          QCamera::ExposureMode::ExposureBeach },
+	{ "Action",         QCamera::ExposureMode::ExposureAction },
+	{ "Landscape",      QCamera::ExposureMode::ExposureLandscape },
+	{ "Night Portrait", QCamera::ExposureMode::ExposureNightPortrait },
+	{ "Theatre",        QCamera::ExposureMode::ExposureTheatre },
+	{ "Sunset",         QCamera::ExposureMode::ExposureSunset },
+	{ "Steady Photo",   QCamera::ExposureMode::ExposureSteadyPhoto },
+	{ "Fireworks",      QCamera::ExposureMode::ExposureFireworks },
+	{ "Party",          QCamera::ExposureMode::ExposureParty },
+	{ "Candlelight",    QCamera::ExposureMode::ExposureCandlelight },
+	{ "Barcode",        QCamera::ExposureMode::ExposureBarcode }
+};
+
+/// <summary>
+/// A map of string reps to their values for flash modes.
+/// </summary>
+QMap<QString, QCamera::FlashMode> flashModeMap{
+	{ "Off",     QCamera::FlashMode::FlashOff },
+	{ "On",      QCamera::FlashMode::FlashOn },
+	{ "Auto",    QCamera::FlashMode::FlashAuto }
+};
+
+/// <summary>
+/// A map of string reps to their values for torch modes.
+/// </summary>
+QMap<QString, QCamera::TorchMode> torchModeMap{
+	{ "Off",     QCamera::TorchMode::TorchOff },
+	{ "On",      QCamera::TorchMode::TorchOn },
+	{ "Auto",    QCamera::TorchMode::TorchAuto }
+};
+
+/// <summary>
+/// A map of string reps to their values for white balance modes.
+/// </summary>
+QMap<QString, QCamera::WhiteBalanceMode> whiteBalanceModeMap{
+	{ "Auto",           QCamera::WhiteBalanceMode::WhiteBalanceAuto },
+	{ "Manual",           QCamera::WhiteBalanceMode::WhiteBalanceManual },
+	{ "Sunlight",       QCamera::WhiteBalanceMode::WhiteBalanceSunlight },
+	{ "Cloudy",         QCamera::WhiteBalanceMode::WhiteBalanceCloudy },
+	{ "Shade",          QCamera::WhiteBalanceMode::WhiteBalanceShade },
+	{ "Tungsten",       QCamera::WhiteBalanceMode::WhiteBalanceTungsten },
+	{ "Fluorescent",    QCamera::WhiteBalanceMode::WhiteBalanceFluorescent },
+	{ "Flash",          QCamera::WhiteBalanceMode::WhiteBalanceFlash },
+	{ "Sunset",        QCamera::WhiteBalanceMode::WhiteBalanceSunset }
+};
+
+/// <summary>
+/// A map of string reps to their values for focus modes.
+/// </summary>
+QMap<QString, QCamera::FocusMode> focusModeMap{
+	{ "Auto",        QCamera::FocusMode::FocusModeAuto },
+	{ "Auto (Near)", QCamera::FocusMode::FocusModeAutoNear },
+	{ "Auto (Far)",  QCamera::FocusMode::FocusModeAutoFar },
+	{ "Hyperfocal",  QCamera::FocusMode::FocusModeHyperfocal },
+	{ "Infinity",    QCamera::FocusMode::FocusModeInfinity },
+	{ "Manual",      QCamera::FocusMode::FocusModeManual }
+};
+
 QtCameraControlsDialog::QtCameraControlsDialog(QCamera* camera, QMediaCaptureSession* cap, QWidget* parent)
 	: QDialog(parent), pCamera(camera)
 {
@@ -52,8 +120,16 @@ QtCameraControlsDialog::QtCameraControlsDialog(QCamera* camera, QMediaCaptureSes
 		camera->setActive(state == Qt::CheckState::Checked);
 		});
 
+	QMessageBox::information(this, "Features", QString::number(pCamera->supportedFeatures().toInt()));
+
+	// Initialize supported features
+	initializeSupportedFeatures();
+
 	/// Initialize Formats box
 	initializeFormatGroup();
+
+	// Initialize Zoom/Focus box
+	initializeZoomFocusGroup();
 
 	/// Initialize settings group
 	initializeSettingsGroup();
@@ -129,8 +205,102 @@ void QtCameraControlsDialog::populateFilterDropdowns()
 	}
 }
 
-void QtCameraControlsDialog::initializeExposureModes()
+void QtCameraControlsDialog::populateExposureModes()
 {
+	ui.dropdownExposureMode->blockSignals(true);
+	ui.dropdownExposureMode->clear();
+	for (auto itr = exposureModeMap.begin(); itr != exposureModeMap.end(); itr++)
+	{
+		QString name = itr.key();
+		QCamera::ExposureMode mode = itr.value();
+
+		// Add mode if it is supported
+		if (pCamera->isExposureModeSupported(mode)) ui.dropdownExposureMode->addItem(name, mode);
+	}
+	ui.dropdownExposureMode->blockSignals(false);
+}
+
+void QtCameraControlsDialog::populateFlashModes()
+{
+	ui.dropdownFlashMode->blockSignals(true);
+	ui.dropdownFlashMode->clear();
+	for (auto itr = flashModeMap.begin(); itr != flashModeMap.end(); itr++)
+	{
+		QString name = itr.key();
+		QCamera::FlashMode mode = itr.value();
+
+		// Add mode if it is supported
+		if (pCamera->isFlashModeSupported(mode)) ui.dropdownFlashMode->addItem(name, mode);
+	}
+	ui.dropdownFlashMode->blockSignals(false);
+}
+
+void QtCameraControlsDialog::populateFocusModes()
+{
+	ui.dropdownFocusMode->blockSignals(true);
+	ui.dropdownFocusMode->clear();
+	for (auto itr = focusModeMap.begin(); itr != focusModeMap.end(); itr++)
+	{
+		QString name = itr.key();
+		QCamera::FocusMode mode = itr.value();
+
+		// Add mode if it is supported
+		if (pCamera->isFocusModeSupported(mode)) ui.dropdownFocusMode->addItem(name, mode);
+	}
+	ui.dropdownFocusMode->blockSignals(false);
+}
+
+void QtCameraControlsDialog::populateTorchModes()
+{
+	ui.dropdownTorchMode->blockSignals(true);
+	ui.dropdownTorchMode->clear();
+	for (auto itr = torchModeMap.begin(); itr != torchModeMap.end(); itr++)
+	{
+		QString name = itr.key();
+		QCamera::TorchMode mode = itr.value();
+
+		// Add mode if it is supported
+		if (pCamera->isTorchModeSupported(mode)) ui.dropdownTorchMode->addItem(name, mode);
+	}
+	ui.dropdownTorchMode->blockSignals(false);
+}
+
+void QtCameraControlsDialog::populateWhiteBalanceModes()
+{
+	ui.dropdownWhiteBalanceMode->blockSignals(true);
+	ui.dropdownWhiteBalanceMode->clear();
+	for (auto itr = whiteBalanceModeMap.begin(); itr != whiteBalanceModeMap.end(); itr++)
+	{
+		QString name = itr.key();
+		QCamera::WhiteBalanceMode mode = itr.value();
+
+		// Add mode if it is supported
+		if (pCamera->isWhiteBalanceModeSupported(mode)) ui.dropdownWhiteBalanceMode->addItem(name, mode);
+	}
+	ui.dropdownWhiteBalanceMode->blockSignals(false);
+}
+
+void QtCameraControlsDialog::initializeSupportedFeatures()
+{
+	QCamera::Features features = pCamera->supportedFeatures();
+
+	// Check if color temperature is supported
+	ui.sliderColorTemp->setEnabled(features & QCamera::Feature::ColorTemperature);
+
+	// Check if exposure compensation is supported
+	ui.sliderExposureComp->setEnabled(features & QCamera::Feature::ExposureCompensation);
+
+	// Check if ISO sensitivity is supported
+	ui.sliderManualIsoSensitivity->setEnabled(features & QCamera::Feature::IsoSensitivity);
+
+	// Check if manual exposure time is supported
+	ui.sliderManualExposureTime->setEnabled(features & QCamera::Feature::ManualExposureTime);
+
+	// TODO: Check if custom focus point is supported
+	//ui.sliderFocusPoint->setEnabled(features & QCamera::Feature::FocusPoint);
+
+	// Check if focus distance is supported
+	ui.sliderFocusDistance->setEnabled(features & QCamera::Feature::FocusDistance);
 
 }
 
@@ -178,6 +348,9 @@ void QtCameraControlsDialog::initializeZoomFocusGroup()
 	ui.sliderZoom->setValue(pCamera->zoomFactor());
 	ui.sliderFocusDistance->setValue(pCamera->focusDistance());
 
+	// Populate focus modes
+	populateFocusModes();
+
 	// Connect widgets to controls
 	connect(ui.sliderZoom, &QSlider::valueChanged, pCamera, [this](int value) {
 		pCamera->setZoomFactor(value);
@@ -190,6 +363,12 @@ void QtCameraControlsDialog::initializeZoomFocusGroup()
 
 void QtCameraControlsDialog::initializeSettingsGroup()
 {
+	// Populate dropdowns
+	populateExposureModes();
+	populateFlashModes();
+	populateTorchModes();
+	populateWhiteBalanceModes();
+
 	/// Initialize Settings Box values
 	// Controls
 	ui.sliderColorTemp->setValue(pCamera->colorTemperature());
@@ -211,10 +390,7 @@ void QtCameraControlsDialog::initializeSettingsGroup()
 	ui.sliderManualExposureTime->setMinimum(pCamera->minimumExposureTime());
 	ui.sliderManualExposureTime->setMaximum(pCamera->maximumExposureTime());
 	ui.sliderManualIsoSensitivity->setMinimum(pCamera->minimumIsoSensitivity());
-	ui.sliderManualIsoSensitivity->setMaximum(pCamera->maximumIsoSensitivity());
-
-	// Check if modes are supported
-	
+	ui.sliderManualIsoSensitivity->setMaximum(pCamera->maximumIsoSensitivity());	
 
 	// Connect widgets to controls
 	connectSettingsControls();
