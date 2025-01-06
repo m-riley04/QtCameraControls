@@ -13,6 +13,12 @@ public:
     QtCameraControlsWindow(QWidget *parent = nullptr);
     ~QtCameraControlsWindow();
 
+public slots:
+	void refreshCameraDevices();
+    QCameraDevice findDeviceFromIndex(int index);
+
 private:
     Ui::QtCameraControlsWindow ui;
+    QCamera* pCamera;
+	QMediaCaptureSession* pCaptureSession;
 };

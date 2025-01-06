@@ -1,4 +1,5 @@
-<UI version="4.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>QtCameraControlsWindow</class>
  <widget class="QMainWindow" name="QtCameraControlsWindow">
   <property name="geometry">
@@ -12,7 +13,23 @@
   <property name="windowTitle">
    <string>QtCameraControls</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="2">
+     <widget class="QPushButton" name="buttonSettings">
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QComboBox" name="dropdownVideoDevices"/>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QVideoWidget" name="videoPreview" native="true"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -22,20 +39,49 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionGitHub"/>
+    <addaction name="actionCredits"/>
+   </widget>
+   <widget class="QMenu" name="menuDevice">
+    <property name="title">
+     <string>Device</string>
+    </property>
+    <addaction name="actionRefresh_List"/>
+   </widget>
+   <addaction name="menuDevice"/>
+   <addaction name="menuAbout"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionGitHub">
+   <property name="text">
+    <string>GitHub</string>
+   </property>
+  </action>
+  <action name="actionCredits">
+   <property name="text">
+    <string>Credits</string>
+   </property>
+  </action>
+  <action name="actionRefresh_List">
+   <property name="text">
+    <string>Refresh Device List</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QVideoWidget</class>
+   <extends>QWidget</extends>
+   <header>qvideowidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="qtcameracontrolswindow.qrc"/>
  </resources>
  <connections/>
-</UI>
+</ui>
