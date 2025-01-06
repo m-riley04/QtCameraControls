@@ -27,14 +27,15 @@ A widget/dialog for controlling Qt camera settings and state. It includes all av
 	- [x] Focus Mode
 	- [x] Focus Distance
 - [x] FFMPEG support for UVC camera control
-- [ ] Full checks for camera feature availablility
-- [ ] Full error handling
+- [x] Full checks for camera feature availablility
+- [ ] "Full" error handling
+- [x] Docstrings for all functions
 
 ## Test Program Features
-- [ ] Basic camera preview:
+- [x] Basic camera preview:
 	- [x] QVideoWidget preview
 	- [x] Camera device selection
-	- [ ] Add auto-refresh for camera devices
+	- [x] Add auto-refresh for camera devices
 
 # Build Instructions
 1. Clone the repository
