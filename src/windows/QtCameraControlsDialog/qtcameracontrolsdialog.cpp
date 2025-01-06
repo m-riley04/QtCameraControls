@@ -288,22 +288,43 @@ void QtCameraControlsDialog::initializeSupportedFeatures()
 	QCamera::Features features = pCamera->supportedFeatures();
 
 	// Check if color temperature is supported
-	ui.sliderColorTemp->setEnabled(features & QCamera::Feature::ColorTemperature);
+	bool colorTempSupported = features & QCamera::Feature::ColorTemperature;
+	ui.sliderColorTemp->setEnabled(colorTempSupported);
+	ui.labelColorTemperature->setEnabled(colorTempSupported);
 
 	// Check if exposure compensation is supported
-	ui.sliderExposureComp->setEnabled(features & QCamera::Feature::ExposureCompensation);
+	bool exposureCompSupported = features & QCamera::Feature::ExposureCompensation;
+	ui.sliderExposureComp->setEnabled(exposureCompSupported);
+	ui.labelExposureComp->setEnabled(exposureCompSupported);
 
 	// Check if ISO sensitivity is supported
-	ui.sliderManualIsoSensitivity->setEnabled(features & QCamera::Feature::IsoSensitivity);
+	bool isoSensitivitySupported = features & QCamera::Feature::IsoSensitivity;
+	ui.sliderManualIsoSensitivity->setEnabled(isoSensitivitySupported);
+	ui.labelManualIsoSensitivity->setEnabled(isoSensitivitySupported);
+	ui.checkboxAutoIsoSensitivity->setEnabled(isoSensitivitySupported);
+	ui.labelAutoIsoSensitivity->setEnabled(isoSensitivitySupported);
 
 	// Check if manual exposure time is supported
-	ui.sliderManualExposureTime->setEnabled(features & QCamera::Feature::ManualExposureTime);
+	bool manualExposureTimeSupported = features & QCamera::Feature::ManualExposureTime;
+	ui.sliderManualExposureTime->setEnabled(manualExposureTimeSupported);
+	ui.labelManualExposureTime->setEnabled(manualExposureTimeSupported);
+	ui.checkboxAutoExposureTime->setEnabled(manualExposureTimeSupported);
+	ui.labelAutoExposureTime->setEnabled(manualExposureTimeSupported);
 
 	// TODO: Check if custom focus point is supported
 	//ui.sliderFocusPoint->setEnabled(features & QCamera::Feature::FocusPoint);
 
 	// Check if focus distance is supported
-	ui.sliderFocusDistance->setEnabled(features & QCamera::Feature::FocusDistance);
+	bool focusDistanceSupported = features & QCamera::Feature::FocusDistance;
+	ui.sliderFocusDistance->setEnabled(focusDistanceSupported);
+	ui.labelFocusDistance->setEnabled(focusDistanceSupported);
+
+	// Check OS-specific features
+	#ifdef Q_OS_WIN
+		ui.buttonFFMPEG->setEnabled(true);
+	#else
+		ui.buttonFFMPEG->hide();
+	#endif
 
 }
 
