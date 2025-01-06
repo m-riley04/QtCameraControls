@@ -16,17 +16,9 @@ QtCameraControlsWindow::QtCameraControlsWindow(QWidget *parent)
 	// Init dropdown
 	refreshCameraDevices();
 
-	// Connect button to open camera controls dialog
-	connect(ui.buttonSettings, &QPushButton::clicked, this, [this]() {
-		QtCameraControlsDialog* dialog = new QtCameraControlsDialog(pCamera, pCaptureSession, this);
-		dialog->exec();
-		});
-
-	// Connect dropdown to change camera device
-	connect(ui.dropdownVideoDevices, &QComboBox::currentIndexChanged, this, [this](int i) {
-		auto device = findDeviceFromIndex(i);
-		pCamera->setCameraDevice(device);
-		});
+	// Init other components
+	initializeWidgets();
+	initializeMenuBar();
 }
 
 QtCameraControlsWindow::~QtCameraControlsWindow()
@@ -39,11 +31,17 @@ void QtCameraControlsWindow::refreshCameraDevices() {
 	// Clear dropdown list
 	ui.dropdownVideoDevices->clear();
 
+	// Block signals to prevent changing camera device
+	ui.dropdownVideoDevices->blockSignals(true);
+
 	// Populate dropdown with available cameras
 	QList<QCameraDevice> cameras = QMediaDevices::videoInputs();
 	for (QCameraDevice& c : cameras) {
 		ui.dropdownVideoDevices->addItem(c.description());
 	}
+
+	// Unblock signals
+	ui.dropdownVideoDevices->blockSignals(false);
 }
 
 QCameraDevice QtCameraControlsWindow::findDeviceFromIndex(int index) {
@@ -55,4 +53,24 @@ QCameraDevice QtCameraControlsWindow::findDeviceFromIndex(int index) {
 	}
 
 	return selectedDevice;
+}
+
+void QtCameraControlsWindow::initializeMenuBar()
+{
+	connect(ui.actionRefreshDeviceList, &QAction::triggered, this, &QtCameraControlsWindow::refreshCameraDevices);
+}
+
+void QtCameraControlsWindow::initializeWidgets()
+{
+	// Connect button to open camera controls dialog
+	connect(ui.buttonSettings, &QPushButton::clicked, this, [this]() {
+		QtCameraControlsDialog* dialog = new QtCameraControlsDialog(pCamera, pCaptureSession, this);
+		dialog->exec();
+		});
+
+	// Connect dropdown to change camera device
+	connect(ui.dropdownVideoDevices, &QComboBox::currentIndexChanged, this, [this](int i) {
+		auto device = findDeviceFromIndex(i);
+		pCamera->setCameraDevice(device);
+		});
 }

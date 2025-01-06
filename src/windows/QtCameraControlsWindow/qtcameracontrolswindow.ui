@@ -50,7 +50,7 @@
     <property name="title">
      <string>Device</string>
     </property>
-    <addaction name="actionRefresh_List"/>
+    <addaction name="actionRefreshDeviceList"/>
    </widget>
    <addaction name="menuDevice"/>
    <addaction name="menuAbout"/>
@@ -65,7 +65,7 @@
     <string>Credits</string>
    </property>
   </action>
-  <action name="actionRefresh_List">
+  <action name="actionRefreshDeviceList">
    <property name="text">
     <string>Refresh Device List</string>
    </property>

@@ -17,6 +17,9 @@ public slots:
 	void refreshCameraDevices();
     QCameraDevice findDeviceFromIndex(int index);
 
+    void initializeMenuBar();
+    void initializeWidgets();
+
 private:
     Ui::QtCameraControlsWindow ui;
     QCamera* pCamera;
