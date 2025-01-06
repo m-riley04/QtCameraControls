@@ -14,6 +14,7 @@ A widget/dialog for controlling Qt camera settings and state. It includes all av
         - [Formats](#formats)
         - [Zoom and Focus](#zoom-and-focus)
         - [Settings and Properties](#settings-and-properties)
+- [Dependencies](#dependencies)
 
 # Supported Platforms
 - Windows
