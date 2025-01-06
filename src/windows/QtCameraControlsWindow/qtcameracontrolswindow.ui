@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<UI version="4.0">
  <class>QtCameraControlsWindow</class>
  <widget class="QMainWindow" name="QtCameraControlsWindow">
   <property name="geometry">
@@ -84,4 +83,4 @@
   <include location="qtcameracontrolswindow.qrc"/>
  </resources>
  <connections/>
-</ui>
+</UI>

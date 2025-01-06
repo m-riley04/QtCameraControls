@@ -57,7 +57,17 @@ QCameraDevice QtCameraControlsWindow::findDeviceFromIndex(int index) {
 
 void QtCameraControlsWindow::initializeMenuBar()
 {
+	// Device
 	connect(ui.actionRefreshDeviceList, &QAction::triggered, this, &QtCameraControlsWindow::refreshCameraDevices);
+
+	// About
+	connect(ui.actionGitHub, &QAction::triggered, this, []() {
+		QDesktopServices::openUrl(QUrl("https://github.com/m-riley04/QtCameraControls"));
+		});
+
+	connect(ui.actionCredits, &QAction::triggered, this, []() {
+		QDesktopServices::openUrl(QUrl("https://rileymeyerkorth.com"));
+		});
 }
 
 void QtCameraControlsWindow::initializeWidgets()
