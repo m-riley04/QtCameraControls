@@ -120,8 +120,6 @@ QtCameraControlsDialog::QtCameraControlsDialog(QCamera* camera, QMediaCaptureSes
 		camera->setActive(state == Qt::CheckState::Checked);
 		});
 
-	QMessageBox::information(this, "Features", QString::number(pCamera->supportedFeatures().toInt()));
-
 	// Initialize supported features
 	initializeSupportedFeatures();
 
