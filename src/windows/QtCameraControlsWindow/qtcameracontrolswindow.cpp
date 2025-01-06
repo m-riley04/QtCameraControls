@@ -9,9 +9,14 @@ QtCameraControlsWindow::QtCameraControlsWindow(QWidget *parent)
 	pCamera = new QCamera();
 	pCamera->setCameraDevice(QMediaDevices::defaultVideoInput());
 	pCamera->setActive(true);
+
+	// Initialize capture session
 	pCaptureSession = new QMediaCaptureSession();
 	pCaptureSession->setCamera(pCamera);
 	pCaptureSession->setVideoOutput(ui.videoPreview);
+
+	// Initialize media devices
+	pMediaDevices = new QMediaDevices();
 
 	// Init dropdown
 	refreshCameraDevices();
@@ -25,6 +30,7 @@ QtCameraControlsWindow::~QtCameraControlsWindow()
 {
 	delete pCamera;
 	delete pCaptureSession;
+	delete pMediaDevices;
 }
 
 void QtCameraControlsWindow::refreshCameraDevices() {
@@ -83,4 +89,13 @@ void QtCameraControlsWindow::initializeWidgets()
 		auto device = findDeviceFromIndex(i);
 		pCamera->setCameraDevice(device);
 		});
+
+	// Auto refresh camera devices
+	connect(pMediaDevices, &QMediaDevices::videoInputsChanged, this, &QtCameraControlsWindow::refreshCameraDevices);
+
+	connect(pCamera, &QCamera::errorOccurred, this, [this](QCamera::Error error) {
+		QMessageBox::warning(this, "Error", "Camera error occurred: " + pCamera->errorString());
+		
+		});
+
 }

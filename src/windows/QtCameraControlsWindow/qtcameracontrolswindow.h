@@ -23,5 +23,6 @@ public slots:
 private:
     Ui::QtCameraControlsWindow ui;
     QCamera* pCamera;
+	QMediaDevices* pMediaDevices;
 	QMediaCaptureSession* pCaptureSession;
 };
