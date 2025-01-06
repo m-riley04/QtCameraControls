@@ -14,7 +14,16 @@ public:
     ~QtCameraControlsWindow();
 
 public slots:
+	/// <summary>
+	/// Refreshes the camera devices dropdown from QMediaDevices
+	/// </summary>
 	void refreshCameraDevices();
+
+    /// <summary>
+	/// Finds a camera device from the dropdown index
+    /// </summary>
+    /// <param name="index">The index from the device dropdown</param>
+    /// <returns></returns>
     QCameraDevice findDeviceFromIndex(int index);
 
     void initializeMenuBar();
