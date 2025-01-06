@@ -375,14 +375,29 @@ void QtCameraControlsDialog::initializeZoomFocusGroup()
 	// Populate focus modes
 	populateFocusModes();
 
+	// Initialize min/max values
+	ui.sliderZoom->setMinimum(pCamera->minimumZoomFactor());
+	ui.sliderZoom->setMaximum(pCamera->maximumZoomFactor());
+
 	// Connect widgets to controls
+	connect(ui.sliderZoomRate, &QSlider::valueChanged, pCamera, [this](int value) {
+		pCamera->zoomTo(pCamera->zoomFactor(), value);
+		});
+
 	connect(ui.sliderZoom, &QSlider::valueChanged, pCamera, [this](int value) {
 		pCamera->setZoomFactor(value);
+		pCamera->zoomTo(value, 1);
+		});
+
+	connect(ui.dropdownFocusMode, &QComboBox::currentIndexChanged, pCamera, [this](int index) {
+		pCamera->setFocusMode(static_cast<QCamera::FocusMode>(index));
 		});
 
 	connect(ui.sliderFocusDistance, &QSlider::valueChanged, pCamera, [this](int value) {
 		pCamera->setFocusDistance(value);
 		});
+
+	
 }
 
 void QtCameraControlsDialog::initializeSettingsGroup()
@@ -491,6 +506,8 @@ void QtCameraControlsDialog::resetFilters()
 	ui.dropdownFps->blockSignals(false);
 	ui.dropdownResolution->blockSignals(false);
 	ui.dropdownPixelFormat->blockSignals(false);
+
+	
 }
 
 void QtCameraControlsDialog::onFormatClicked(int row, int column)
