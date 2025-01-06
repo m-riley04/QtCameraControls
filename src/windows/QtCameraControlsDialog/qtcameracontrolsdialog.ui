@@ -30,7 +30,7 @@
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="labelCameraDeviceTitle">
         <property name="text">
          <string>Camera Device: </string>
         </property>
@@ -44,7 +44,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_14">
+       <widget class="QLabel" name="labelActive">
         <property name="text">
          <string>Active</string>
         </property>
@@ -162,7 +162,7 @@
               <widget class="QComboBox" name="dropdownFps"/>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="label_10">
+              <widget class="QLabel" name="labelPixelFormatFilter">
                <property name="text">
                 <string>Pixel Format</string>
                </property>
@@ -175,7 +175,7 @@
               <widget class="QComboBox" name="dropdownResolution"/>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_18">
+              <widget class="QLabel" name="labelResolutionFilter">
                <property name="text">
                 <string>Resolution</string>
                </property>
@@ -188,7 +188,7 @@
               <widget class="QComboBox" name="dropdownPixelFormat"/>
              </item>
              <item row="0" column="0">
-              <widget class="QLabel" name="label_17">
+              <widget class="QLabel" name="labelFpsFilter">
                <property name="text">
                 <string>FPS</string>
                </property>
@@ -201,7 +201,7 @@
            </widget>
           </item>
           <item row="1" column="0" colspan="2">
-           <widget class="QLabel" name="label_11">
+           <widget class="QLabel" name="labelResolutionTitle">
             <property name="text">
              <string>Resolution:</string>
             </property>
@@ -215,14 +215,14 @@
            </widget>
           </item>
           <item row="2" column="0" colspan="2">
-           <widget class="QLabel" name="label_13">
+           <widget class="QLabel" name="labelPixelFormatTitle">
             <property name="text">
              <string>Pixel Format:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label_12">
+           <widget class="QLabel" name="labelFpsTitle">
             <property name="text">
              <string>FPS:</string>
             </property>
@@ -266,15 +266,11 @@
           <string>Zoom and Focus</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
-          <item row="2" column="1">
-           <widget class="QSlider" name="sliderFocusDistance">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelFocusDistance">
+            <property name="enabled">
+             <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_21">
             <property name="text">
              <string>Focus Distance</string>
             </property>
@@ -283,7 +279,41 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelZoomRate">
+            <property name="text">
+             <string>Zoom Rate</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelZoomFactor">
+            <property name="text">
+             <string>Zoom Factor</string>
+            </property>
+            <property name="buddy">
+             <cstring>sliderZoom</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelFocusMode">
+            <property name="text">
+             <string>Focus Mode</string>
+            </property>
+            <property name="buddy">
+             <cstring>dropdownFocusMode</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSlider" name="sliderFocusDistance">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
            <widget class="QComboBox" name="dropdownFocusMode">
             <item>
              <property name="text">
@@ -317,30 +347,20 @@
             </item>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>Focus Mode</string>
-            </property>
-            <property name="buddy">
-             <cstring>dropdownFocusMode</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
+          <item row="1" column="1">
            <widget class="QSlider" name="sliderZoom">
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>Zoom Factor</string>
+          <item row="0" column="1">
+           <widget class="QSlider" name="sliderZoomRate">
+            <property name="singleStep">
+             <number>1</number>
             </property>
-            <property name="buddy">
-             <cstring>sliderZoom</cstring>
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -423,7 +443,7 @@
            </widget>
           </item>
           <item row="5" column="0">
-           <widget class="QLabel" name="label_15">
+           <widget class="QLabel" name="labelAutoExposureTime">
             <property name="text">
              <string>Auto Exposure Time</string>
             </property>
@@ -433,7 +453,7 @@
            </widget>
           </item>
           <item row="8" column="0">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="labelManualIsoSensitivity">
             <property name="text">
              <string>Manual ISO Sensitivity</string>
             </property>
@@ -443,7 +463,7 @@
            </widget>
           </item>
           <item row="7" column="0">
-           <widget class="QLabel" name="label_16">
+           <widget class="QLabel" name="labelAutoIsoSensitivity">
             <property name="text">
              <string>Auto Iso Sensitivity</string>
             </property>
@@ -485,7 +505,7 @@
            </widget>
           </item>
           <item row="4" column="0">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="labelFlashMode">
             <property name="text">
              <string>Flash Mode</string>
             </property>
@@ -630,7 +650,7 @@
            </widget>
           </item>
           <item row="10" column="0">
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="labelWhiteBalanceMode">
             <property name="text">
              <string>White Balance Mode</string>
             </property>
@@ -647,7 +667,7 @@
            </widget>
           </item>
           <item row="6" column="0">
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="labelManualExposureTime">
             <property name="text">
              <string>Manual Exposure Time</string>
             </property>
@@ -657,7 +677,7 @@
            </widget>
           </item>
           <item row="9" column="0">
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="labelTorchMode">
             <property name="text">
              <string>Torch Mode</string>
             </property>
@@ -667,7 +687,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="labelExposureMode">
             <property name="text">
              <string>Exposure Mode</string>
             </property>
@@ -693,7 +713,7 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="labelExposureComp">
             <property name="text">
              <string>Exposure Comp.</string>
             </property>
@@ -703,7 +723,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="labelColorTemperature">
             <property name="text">
              <string>Color Temperature</string>
             </property>
@@ -737,9 +757,6 @@
   <tabstop>tableFormats</tabstop>
   <tabstop>buttonResetFilters</tabstop>
   <tabstop>buttonSelect</tabstop>
-  <tabstop>sliderZoom</tabstop>
-  <tabstop>dropdownFocusMode</tabstop>
-  <tabstop>sliderFocusDistance</tabstop>
   <tabstop>sliderColorTemp</tabstop>
   <tabstop>dropdownExposureMode</tabstop>
   <tabstop>sliderExposureComp</tabstop>
