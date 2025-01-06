@@ -31,9 +31,10 @@ A widget/dialog for controlling Qt camera settings and state. It includes all av
 - [ ] Full error handling
 
 ## Test Program Features
-- [x] Basic camera preview:
+- [ ] Basic camera preview:
 	- [x] QVideoWidget preview
 	- [x] Camera device selection
+	- [ ] Add auto-refresh for camera devices
 
 # Build Instructions
 1. Clone the repository
