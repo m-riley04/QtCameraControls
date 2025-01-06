@@ -100,8 +100,8 @@
     <ClCompile Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.cpp" />
     <ClCompile Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <None Include="QtCameraControls.ico" />
-    <ResourceCompile Include="QtCameraControls.rc" />
+    <None Include="resources\QtCameraControls.ico" />
+    <ResourceCompile Include="resources\QtCameraControls.rc" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\windows\QtCameraControlsDialog\qtcameracontrolsdialog.h" />

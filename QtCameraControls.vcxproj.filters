@@ -35,10 +35,10 @@
     <ClCompile Include="src\windows\QtCameraControlsWindow\qtcameracontrolswindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <None Include="QtCameraControls.ico">
+    <None Include="resources\QtCameraControls.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <ResourceCompile Include="QtCameraControls.rc">
+    <ResourceCompile Include="resources\QtCameraControls.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
