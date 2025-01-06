@@ -31,9 +31,9 @@ private:
 	void populateFilterDropdowns();
 	void populateExposureModes();
 	void populateFlashModes();
-	void populateFocusModes();
 	void populateTorchModes();
 	void populateWhiteBalanceModes();
+	void populateFocusModes();
 
 	void initializeSupportedFeatures();
 
